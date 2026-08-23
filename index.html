@@ -87,6 +87,7 @@ p { font-size: 1rem; color: var(--ink); }
   justify-content: center;
   overflow: hidden;
   padding: 80px 0 60px;
+  perspective: 1000px;
 }
 .hero-bg {
   position: absolute;
@@ -116,8 +117,11 @@ p { font-size: 1rem; color: var(--ink); }
   border-radius: 50%;
   box-shadow: 0 8px 32px rgba(0,0,0,0.3);
   will-change: transform;
+  opacity: 0;
 }
 @media (max-width: 768px) { .hero-logo { width: 90px; } }
+
+/* === EYEBROW === */
 .hero-eyebrow {
   font-family: var(--sans);
   font-size: 0.8rem;
@@ -130,23 +134,59 @@ p { font-size: 1rem; color: var(--ink); }
   align-items: center;
   justify-content: center;
   gap: 12px;
+  opacity: 0;
 }
 .hero-eyebrow::before {
   content: '';
   width: 40px; height: 2px;
   background: var(--accent2);
 }
+
+/* === H1 TEXT === */
 .hero h1 {
   font-size: clamp(2.2rem, 6vw, 3.75rem);
   color: #fff;
   margin-bottom: 24px;
   text-shadow: 0 2px 20px rgba(0,0,0,0.5);
   letter-spacing: 0.02em;
+  perspective: 600px;
 }
 .hero h1 .accent-text {
   color: var(--accent2);
   text-shadow: 0 2px 12px rgba(0,0,0,0.6), 0 0 30px rgba(196, 163, 90, 0.4);
+  position: relative;
+  display: inline-block;
 }
+
+/* === CHAR WRAPPERS === */
+.char {
+  display: inline-block;
+  will-change: transform, opacity, filter;
+  transform-style: preserve-3d;
+}
+.char-wrap {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.1em;
+}
+
+/* === GOLD SHIMMER SWEEP === */
+.accent-text::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 230, 150, 0.8) 50%, transparent 100%);
+  pointer-events: none;
+  animation: shimmerSweep 5s ease-in-out 2.5s infinite;
+}
+@keyframes shimmerSweep {
+  0% { left: -60%; }
+  40%, 100% { left: 120%; }
+}
+
+/* === SUBTITLE === */
 .hero-subtitle {
   font-size: clamp(1rem, 2vw, 1.2rem);
   color: rgba(255, 255, 255, 0.88);
@@ -155,12 +195,20 @@ p { font-size: 1rem; color: var(--ink); }
   margin-left: auto;
   margin-right: auto;
   text-shadow: 0 1px 8px rgba(0,0,0,0.3);
+  opacity: 0;
 }
+.sub-word {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+/* === ACTIONS === */
 .hero-actions {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
   justify-content: center;
+  opacity: 0;
 }
 .hero-actions .btn {
   display: inline-flex;
@@ -203,12 +251,15 @@ p { font-size: 1rem; color: var(--ink); }
 .hero-actions .btn-primary:hover .btn-arrow {
   transform: translateX(4px);
 }
+
+/* === STATS === */
 .hero-stats {
   display: flex;
   gap: 40px;
   justify-content: center;
   margin-top: 48px;
   flex-wrap: wrap;
+  opacity: 0;
 }
 .hero-stat .num {
   font-family: var(--serif);
@@ -247,6 +298,7 @@ p { font-size: 1rem; color: var(--ink); }
   text-transform: uppercase;
   cursor: pointer;
   transition: color 0.3s ease;
+  opacity: 0;
 }
 .scroll-hint:hover {
   color: rgba(255,255,255,0.8);
@@ -272,20 +324,53 @@ p { font-size: 1rem; color: var(--ink); }
   50% { top: 14px; opacity: 0.3; }
 }
 
-/* === HERO ENTRANCE === */
-.hero-content > * { opacity: 0; }
-
 /* === FLOATING LOGO === */
 @keyframes floatY {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
 }
-.hero-logo { animation: floatY 4s ease-in-out infinite; }
+
+/* === INK WASH DECORATION === */
+.ink-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.15;
+}
+.ink-blob-1 {
+  width: 300px; height: 300px;
+  background: var(--accent2);
+  top: 10%; left: -5%;
+  animation: blobFloat1 12s ease-in-out infinite;
+}
+.ink-blob-2 {
+  width: 250px; height: 250px;
+  background: var(--accent);
+  bottom: 15%; right: -3%;
+  animation: blobFloat2 14s ease-in-out infinite;
+}
+@keyframes blobFloat1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(40px, -30px) scale(1.1); }
+}
+@keyframes blobFloat2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-30px, 40px) scale(0.9); }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .hero-content > * { opacity: 1; }
-  .hero-logo { animation: none; }
+  .hero-logo { opacity: 1; animation: none; }
+  .hero-eyebrow { opacity: 1; }
+  .hero-subtitle { opacity: 1; }
+  .hero-actions { opacity: 1; }
+  .hero-stats { opacity: 1; }
+  .scroll-hint { opacity: 1; }
   .scroll-hint .arrow-down::after { animation: none; }
+  .accent-text::after { display: none; }
+  .ink-blob { display: none; }
 }
 </style>
 </head>
@@ -295,12 +380,14 @@ p { font-size: 1rem; color: var(--ink); }
   <div class="hero-bg">
     <img src="assets/hero_1024x576.jpg" alt="传统文化与数字技术融合">
   </div>
+  <div class="ink-blob ink-blob-1"></div>
+  <div class="ink-blob ink-blob-2"></div>
   <div class="container">
     <div class="hero-content">
       <img src="assets/logo.jpg" alt="文绎新堂 Logo" class="hero-logo">
       <div class="hero-eyebrow">课文双端 · 数字实践</div>
-      <h1>文绎新堂<br><span class="accent-text">课文双端数字实践项目</span></h1>
-      <p class="hero-subtitle">
+      <h1>文绎新堂<br><span class="accent-text" id="accentText">课文双端数字实践项目</span></h1>
+      <p class="hero-subtitle" id="subtitle">
         高校新文科跨专业学生实践团队，坚持人文考据为先、AI 技术赋能，面向中小学美育、县域文博文旅、青年新媒体传播三大场景，开展传统文化数字化实践。
       </p>
       <div class="hero-actions">
@@ -311,15 +398,15 @@ p { font-size: 1rem; color: var(--ink); }
       </div>
       <div class="hero-stats">
         <div class="hero-stat">
-          <div class="num">3</div>
+          <div class="num" data-target="3">0</div>
           <div class="label">核心业务板块</div>
         </div>
         <div class="hero-stat">
-          <div class="num">3</div>
+          <div class="num" data-target="3">0</div>
           <div class="label">级标准化质控流程</div>
         </div>
         <div class="hero-stat">
-          <div class="num">3+</div>
+          <div class="num" data-target="3" data-suffix="+">0</div>
           <div class="label">大场景覆盖</div>
         </div>
       </div>
@@ -337,20 +424,281 @@ p { font-size: 1rem; color: var(--ink); }
 (function() {
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if (!reduceMotion) {
-    var tl = gsap.timeline({ delay: 0.3 });
-    tl
-      .to('.hero-logo', { opacity: 1, duration: 1, ease: 'power3.out' })
-      .to('.hero-eyebrow', { opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.5')
-      .to('.hero h1', { opacity: 1, duration: 1, ease: 'power3.out' }, '-=0.3')
-      .to('.hero-subtitle', { opacity: 1, duration: 0.7, ease: 'power2.out' }, '-=0.5')
-      .to('.hero-actions', { opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.3')
-      .to('.hero-stats', { opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.2')
-      .to('.scroll-hint', { opacity: 1, duration: 0.5, ease: 'power2.out' }, '-=0.1');
-  } else {
-    gsap.set('.hero-content > *', { opacity: 1 });
-    gsap.set('.scroll-hint', { opacity: 1 });
+  // === MANUALLY SPLIT H1 INTO CHARACTERS ===
+  var accentEl = document.getElementById('accentText');
+  var accentText = accentEl.textContent;
+  accentEl.innerHTML = '';
+  var accentChars = [];
+  for (var i = 0; i < accentText.length; i++) {
+    var char = accentText[i];
+    var wrap = document.createElement('span');
+    wrap.className = 'char-wrap';
+    var span = document.createElement('span');
+    span.className = 'char';
+    span.textContent = char;
+    wrap.appendChild(span);
+    accentEl.appendChild(wrap);
+    accentChars.push(span);
   }
+
+  // Also split the first line "文绎新堂"
+  var h1 = document.querySelector('.hero h1');
+  var firstLine = h1.firstChild;
+  if (firstLine && firstLine.nodeType === 3) {
+    var firstText = firstLine.textContent;
+    h1.removeChild(firstLine);
+    var frag = document.createDocumentFragment();
+    var firstChars = [];
+    for (var j = 0; j < firstText.length; j++) {
+      var w = document.createElement('span');
+      w.className = 'char-wrap';
+      var s = document.createElement('span');
+      s.className = 'char';
+      s.textContent = firstText[j];
+      s.style.color = '#fff';
+      s.style.textShadow = '0 2px 20px rgba(0,0,0,0.5)';
+      w.appendChild(s);
+      frag.appendChild(w);
+      firstChars.push(s);
+    }
+    frag.appendChild(document.createElement('br'));
+    h1.insertBefore(frag, h1.firstChild);
+  }
+
+  var allChars = document.querySelectorAll('.hero h1 .char');
+
+  // === SPLIT SUBTITLE INTO WORDS ===
+  var subEl = document.getElementById('subtitle');
+  var subText = subEl.textContent.trim();
+  var subPunct = subText.split('');
+  subEl.innerHTML = '';
+  var subWords = [];
+  var currentWord = '';
+  var wordSpans = [];
+  for (var k = 0; k < subPunct.length; k++) {
+    var ch = subPunct[k];
+    if (ch === '，' || ch === '。' || ch === '、' || ch === ' ' || ch === '；') {
+      if (currentWord) {
+        var ws = document.createElement('span');
+        ws.className = 'sub-word';
+        ws.textContent = currentWord;
+        subEl.appendChild(ws);
+        wordSpans.push(ws);
+        currentWord = '';
+      }
+      var ps = document.createElement('span');
+      ps.className = 'sub-word';
+      ps.textContent = ch;
+      subEl.appendChild(ps);
+      wordSpans.push(ps);
+    } else {
+      currentWord += ch;
+    }
+  }
+  if (currentWord) {
+    var fws = document.createElement('span');
+    fws.className = 'sub-word';
+    fws.textContent = currentWord;
+    subEl.appendChild(fws);
+    wordSpans.push(fws);
+  }
+
+  // === ENTRANCE TIMELINE ===
+  if (!reduceMotion) {
+    // Logo float
+    document.querySelector('.hero-logo').style.animation = 'floatY 4s ease-in-out 1.5s infinite';
+
+    var tl = gsap.timeline({ delay: 0.3 });
+
+    // Logo entrance
+    tl.to('.hero-logo', {
+      opacity: 1,
+      duration: 1,
+      ease: 'power3.out'
+    });
+
+    // Eyebrow letter-spacing + opacity
+    tl.fromTo('.hero-eyebrow', 
+      { opacity: 0, letterSpacing: '0.6em' },
+      { opacity: 1, letterSpacing: '0.25em', duration: 0.8, ease: 'power2.out' },
+      '-=0.5'
+    );
+
+    // H1 chars: 3D rotateX + translateY + opacity + blur
+    tl.from(allChars, {
+      opacity: 0,
+      y: 60,
+      rotateX: -90,
+      filter: 'blur(10px)',
+      stagger: { each: 0.05, from: 'start' },
+      duration: 0.9,
+      ease: 'power3.out'
+    }, '-=0.3');
+
+    // Subtitle words: fade up
+    tl.from(wordSpans, {
+      opacity: 0,
+      y: 20,
+      filter: 'blur(6px)',
+      stagger: 0.03,
+      duration: 0.5,
+      ease: 'power2.out'
+    }, '-=0.4');
+
+    // Subtitle container opacity
+    tl.to('.hero-subtitle', {
+      opacity: 1,
+      duration: 0.1
+    }, '-=0.5');
+
+    // Actions
+    tl.from('.hero-actions', {
+      opacity: 0,
+      y: 30,
+      duration: 0.6,
+      ease: 'power2.out'
+    }, '-=0.3');
+    tl.to('.hero-actions', {
+      opacity: 1,
+      duration: 0.1
+    }, '-=0.6');
+
+    // Stats
+    tl.from('.hero-stats', {
+      opacity: 0,
+      y: 30,
+      duration: 0.6,
+      ease: 'power2.out'
+    }, '-=0.2');
+    tl.to('.hero-stats', {
+      opacity: 1,
+      duration: 0.1
+    }, '-=0.6');
+
+    // Scroll hint
+    tl.to('.scroll-hint', {
+      opacity: 1,
+      duration: 0.5,
+      ease: 'power2.out'
+    }, '-=0.1');
+
+    // === STATS COUNTER ===
+    tl.add(function() {
+      document.querySelectorAll('.hero-stat .num').forEach(function(numEl) {
+        var target = parseInt(numEl.getAttribute('data-target'));
+        var suffix = numEl.getAttribute('data-suffix') || '';
+        var obj = { val: 0 };
+        gsap.to(obj, {
+          val: target,
+          duration: 1.2,
+          ease: 'power2.out',
+          onUpdate: function() {
+            numEl.textContent = Math.round(obj.val) + suffix;
+          }
+        });
+      });
+    }, '-=0.3');
+
+  } else {
+    // Reduced motion: show everything
+    gsap.set('.hero-logo', { opacity: 1 });
+    gsap.set('.hero-eyebrow', { opacity: 1 });
+    gsap.set('.hero-subtitle', { opacity: 1 });
+    gsap.set('.hero-actions', { opacity: 1 });
+    gsap.set('.hero-stats', { opacity: 1 });
+    gsap.set('.scroll-hint', { opacity: 1 });
+    gsap.set(allChars, { opacity: 1 });
+    gsap.set(wordSpans, { opacity: 1 });
+    // Set stat numbers to final values
+    document.querySelectorAll('.hero-stat .num').forEach(function(numEl) {
+      var target = numEl.getAttribute('data-target');
+      var suffix = numEl.getAttribute('data-suffix') || '';
+      numEl.textContent = target + suffix;
+    });
+  }
+
+  // === MOUSE PARALLAX ON CHARS ===
+  if (!reduceMotion) {
+    var hero = document.querySelector('.hero');
+    var mouseX = 0, mouseY = 0;
+    var centerX = 0, centerY = 0;
+    var charsArray = Array.prototype.slice.call(allChars);
+
+    hero.addEventListener('mousemove', function(e) {
+      var rect = hero.getBoundingClientRect();
+      mouseX = e.clientX - rect.left;
+      mouseY = e.clientY - rect.top;
+      centerX = rect.width / 2;
+      centerY = rect.height / 2;
+
+      var dxRatio = (mouseX - centerX) / centerX;
+      var dyRatio = (mouseY - centerY) / centerY;
+
+      charsArray.forEach(function(char, i) {
+        var charRect = char.getBoundingClientRect();
+        var charCx = charRect.left + charRect.width / 2 - rect.left;
+        var charCy = charRect.top + charRect.height / 2 - rect.top;
+
+        var distX = (charCx - mouseX) / centerX;
+        var distY = (charCy - mouseY) / centerY;
+        var dist = Math.sqrt(distX * distX + distY * distY);
+        var intensity = Math.max(0, 1 - dist * 0.8);
+
+        var moveX = dxRatio * intensity * 8;
+        var moveY = dyRatio * intensity * 8;
+
+        gsap.to(char, {
+          x: moveX,
+          y: moveY,
+          duration: 0.6,
+          ease: 'power2.out',
+          overwrite: 'auto'
+        });
+      });
+
+      // Also move logo slightly
+      gsap.to('.hero-logo', {
+        x: dxRatio * 12,
+        y: dyRatio * 12,
+        duration: 0.8,
+        ease: 'power2.out',
+        overwrite: 'auto'
+      });
+
+      // Move ink blobs
+      gsap.to('.ink-blob-1', {
+        x: dxRatio * 30,
+        y: dyRatio * 30,
+        duration: 1,
+        ease: 'power2.out',
+        overwrite: 'auto'
+      });
+      gsap.to('.ink-blob-2', {
+        x: dxRatio * -25,
+        y: dyRatio * -25,
+        duration: 1,
+        ease: 'power2.out',
+        overwrite: 'auto'
+      });
+    });
+
+    // Reset on mouse leave
+    hero.addEventListener('mouseleave', function() {
+      charsArray.forEach(function(char) {
+        gsap.to(char, {
+          x: 0,
+          y: 0,
+          duration: 0.8,
+          ease: 'power3.out',
+          overwrite: 'auto'
+        });
+      });
+      gsap.to('.hero-logo', { x: 0, y: 0, duration: 0.8, ease: 'power3.out' });
+      gsap.to('.ink-blob-1', { x: 0, y: 0, duration: 1, ease: 'power3.out' });
+      gsap.to('.ink-blob-2', { x: 0, y: 0, duration: 1, ease: 'power3.out' });
+    });
+  }
+
 })();
 </script>
 
