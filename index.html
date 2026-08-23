@@ -510,21 +510,23 @@ p { font-size: 1rem; color: var(--ink); }
     );
 
     // H1 chars: 3D rotateX + translateY + opacity + blur
-    tl.from(allChars, {
-      opacity: 0,
-      y: 60,
-      rotateX: -90,
-      filter: 'blur(10px)',
+    tl.set(allChars, { opacity: 0, y: 60, rotateX: -90, filter: 'blur(10px)' });
+    tl.to(allChars, {
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      filter: 'blur(0px)',
       stagger: { each: 0.05, from: 'start' },
       duration: 0.9,
       ease: 'power3.out'
     }, '-=0.3');
 
     // Subtitle words: fade up
-    tl.from(wordSpans, {
-      opacity: 0,
-      y: 20,
-      filter: 'blur(6px)',
+    tl.set(wordSpans, { opacity: 0, y: 20, filter: 'blur(6px)' });
+    tl.to(wordSpans, {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
       stagger: 0.03,
       duration: 0.5,
       ease: 'power2.out'
@@ -582,8 +584,8 @@ p { font-size: 1rem; color: var(--ink); }
     gsap.set('.hero-actions', { opacity: 1 });
     gsap.set('.hero-stats', { opacity: 1 });
     gsap.set('.scroll-hint', { opacity: 1 });
-    gsap.set(allChars, { opacity: 1 });
-    gsap.set(wordSpans, { opacity: 1 });
+    gsap.set(allChars, { opacity: 1, y: 0, rotateX: 0, filter: 'none' });
+    gsap.set(wordSpans, { opacity: 1, y: 0, filter: 'none' });
     // Set stat numbers to final values
     document.querySelectorAll('.hero-stat .num').forEach(function(numEl) {
       var target = numEl.getAttribute('data-target');
