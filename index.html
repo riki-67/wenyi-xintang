@@ -171,21 +171,6 @@ p { font-size: 1rem; color: var(--ink); }
   padding-bottom: 0.1em;
 }
 
-/* === GOLD SHIMMER SWEEP === */
-.accent-text::after {
-  content: '';
-  position: absolute;
-  top: 0; left: -100%;
-  width: 60%; height: 100%;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 230, 150, 0.8) 50%, transparent 100%);
-  pointer-events: none;
-  animation: shimmerSweep 5s ease-in-out 2.5s infinite;
-}
-@keyframes shimmerSweep {
-  0% { left: -60%; }
-  40%, 100% { left: 120%; }
-}
-
 /* === SUBTITLE === */
 .hero-subtitle {
   font-size: clamp(1rem, 2vw, 1.2rem);
@@ -370,7 +355,6 @@ p { font-size: 1rem; color: var(--ink); }
   .scroll-hint { opacity: 1; }
   .scroll-hint .arrow-down::after { animation: none; }
   .accent-text::after { display: none; }
-  .ink-blob { display: none; }
 }
 </style>
 </head>
