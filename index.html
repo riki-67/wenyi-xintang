@@ -225,7 +225,7 @@ nav .nav-inner {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(20, 15, 10, 0.78) 0%, rgba(20, 15, 10, 0.55) 45%, rgba(251, 247, 241, 0.92) 100%);
+  background: linear-gradient(180deg, rgba(43, 33, 24, 0.55) 0%, rgba(43, 33, 24, 0.35) 40%, rgba(251, 247, 241, 0.85) 100%);
 }
 .hero-bg img {
   width: 100%; height: 100%;
@@ -953,65 +953,8 @@ footer .footer-bottom {
 /* === ANIMATIONS === */
 @keyframes fadeInUp {
 
-/* === DECORATIVE DIVIDER === */
-.section-divider {
-  height: 80px;
-  background-image: url('assets/divider_deco.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.7;
-  margin: 0;
-  border: none;
-}
-@media (max-width: 768px) { .section-divider { height: 50px; } }
-
-/* === SECTION BACKGROUND === */
-section[id="summary"],
-section[id="pain-points"],
-section[id="business"],
-section[id="innovation"],
-section[id="achievements"],
-section[id="products"],
-section[id="team"],
-section[id="timeline"],
-section[id="value"] {
-  background-color: #F8F3EC !important;
-  background-image: url('assets/bg_main.jpg') !important;
-  background-size: cover !important;
-  background-position: center !important;
-  background-attachment: fixed !important;
-  background-repeat: no-repeat !important;
-  position: relative;
-}
-section[id="summary"]::before,
-section[id="pain-points"]::before,
-section[id="business"]::before,
-section[id="innovation"]::before,
-section[id="achievements"]::before,
-section[id="products"]::before,
-section[id="team"]::before,
-section[id="timeline"]::before,
-section[id="value"]::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(180deg, rgba(248, 243, 236, 0.35) 0%, rgba(248, 243, 236, 0.28) 50%, rgba(248, 243, 236, 0.35) 100%);
-  pointer-events: none;
-  z-index: 0;
-}
-section[id="summary"] > .container,
-section[id="pain-points"] > .container,
-section[id="business"] > .container,
-section[id="innovation"] > .container,
-section[id="achievements"] > .container,
-section[id="products"] > .container,
-section[id="team"] > .container,
-section[id="timeline"] > .container,
-section[id="value"] > .container {
-  position: relative;
-  z-index: 1;
-}
+/* === ANIMATIONS === */
+@keyframes fadeInUp {
   from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: translateY(0); }
 }
@@ -1128,9 +1071,8 @@ section[id="value"] > .container {
     </div>
   </div>
 </section>
-<div class="section-divider"></div>
 <!-- PAIN POINTS -->
-<section id="pain-points">
+<section id="pain-points" style="background: var(--bg2);">
   <div class="container">
     <div class="section-header fade-in">
       <span class="eyebrow">背景与市场痛点</span>
@@ -1182,7 +1124,6 @@ section[id="value"] > .container {
     </div>
   </div>
 </section>
-<div class="section-divider"></div>
 <!-- BUSINESS MODULES -->
 <section id="business">
   <div class="container">
@@ -1287,9 +1228,8 @@ section[id="value"] > .container {
     </div>
   </div>
 </section>
-<div class="section-divider"></div>
 <!-- INNOVATION -->
-<section id="innovation">
+<section id="innovation" style="background: var(--bg2);">
   <div class="container">
     <div class="section-header fade-in">
       <span class="eyebrow">项目创新点</span>
@@ -1328,7 +1268,6 @@ section[id="value"] > .container {
     </div>
   </div>
 </section>
-<div class="section-divider"></div>
 <!-- ACHIEVEMENTS -->
 <section id="achievements">
   <div class="container">
@@ -1453,7 +1392,6 @@ section[id="value"] > .container {
     </div>
   </div>
 </section>
-<div class="section-divider"></div>
 <!-- CULTURAL PRODUCTS GALLERY -->
 <section id="products">
   <div class="container">
@@ -1491,9 +1429,8 @@ section[id="value"] > .container {
     </div>
   </div>
 </section>
-<div class="section-divider"></div>
 <!-- TEAM -->
-<section id="team">
+<section id="team" style="background: var(--bg2);">
   <div class="container">
     <div class="section-header fade-in">
       <span class="eyebrow">核心团队</span>
@@ -1560,7 +1497,6 @@ section[id="value"] > .container {
     </div>
   </div>
 </section>
-<div class="section-divider"></div>
 <!-- TIMELINE -->
 <section id="timeline">
   <div class="container">
@@ -1603,9 +1539,8 @@ section[id="value"] > .container {
     </div>
   </div>
 </section>
-<div class="section-divider"></div>
 <!-- VALUE -->
-<section id="value">
+<section id="value" style="background: var(--bg2);">
   <div class="container">
     <div class="section-header fade-in">
       <span class="eyebrow">多维项目价值</span>
@@ -1660,7 +1595,6 @@ section[id="value"] > .container {
     </div>
   </div>
 </section>
-<div class="section-divider"></div>
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
