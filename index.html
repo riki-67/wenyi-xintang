@@ -146,10 +146,11 @@ p { font-size: 1rem; color: var(--ink); }
 .hero h1 {
   font-size: clamp(2.2rem, 6vw, 3.75rem);
   color: #fff;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
   text-shadow: 0 2px 20px rgba(0,0,0,0.5);
   letter-spacing: 0.02em;
   perspective: 600px;
+  cursor: default;
 }
 .hero h1 .accent-text {
   color: var(--accent2);
@@ -163,6 +164,8 @@ p { font-size: 1rem; color: var(--ink); }
   display: inline-block;
   will-change: transform, opacity, filter;
   transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              text-shadow 0.4s ease;
 }
 .char-wrap {
   display: inline-block;
@@ -670,6 +673,39 @@ p { font-size: 1rem; color: var(--ink); }
       gsap.to('.hero-logo', { x: 0, y: 0, duration: 0.8, ease: 'power3.out' });
       gsap.to('.ink-blob-1', { x: 0, y: 0, duration: 1, ease: 'power3.out' });
       gsap.to('.ink-blob-2', { x: 0, y: 0, duration: 1, ease: 'power3.out' });
+    });
+  }
+
+  // === HOVER WAVE: chars rise sequentially when hovering H1 ===
+  if (!reduceMotion) {
+    var h1El = document.querySelector('.hero h1');
+    var waveActive = false;
+
+    h1El.addEventListener('mouseenter', function() {
+      if (waveActive) return;
+      waveActive = true;
+      charsArray.forEach(function(char, i) {
+        gsap.to(char, {
+          y: -12,
+          duration: 0.35,
+          delay: i * 0.04,
+          ease: 'power2.out',
+          overwrite: 'auto'
+        });
+      });
+    });
+
+    h1El.addEventListener('mouseleave', function() {
+      waveActive = false;
+      charsArray.forEach(function(char, i) {
+        gsap.to(char, {
+          y: 0,
+          duration: 0.5,
+          delay: i * 0.03,
+          ease: 'elastic.out(1, 0.4)',
+          overwrite: 'auto'
+        });
+      });
     });
   }
 
