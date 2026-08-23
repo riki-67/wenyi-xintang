@@ -709,6 +709,32 @@ p { font-size: 1rem; color: var(--ink); }
     });
   }
 
+  // === PER-CHAR HOVER SCALE: individual chars grow on hover ===
+  if (!reduceMotion) {
+    charsArray.forEach(function(char) {
+      char.addEventListener('mouseenter', function() {
+        gsap.to(char, {
+          scale: 1.35,
+          color: '#C4A35A',
+          textShadow: '0 0 20px rgba(196, 163, 90, 0.6)',
+          duration: 0.3,
+          ease: 'back.out(2)',
+          overwrite: 'auto'
+        });
+      });
+      char.addEventListener('mouseleave', function() {
+        gsap.to(char, {
+          scale: 1,
+          color: '',
+          textShadow: '',
+          duration: 0.5,
+          ease: 'elastic.out(1, 0.4)',
+          overwrite: 'auto'
+        });
+      });
+    });
+  }
+
 })();
 </script>
 
