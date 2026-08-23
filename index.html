@@ -70,6 +70,10 @@ html { scroll-behavior: smooth; font-size: 16px; }
 body {
   font-family: var(--sans);
   background: var(--bg);
+  background-image: url('assets/paper_texture.jpg');
+  background-size: 400px 400px;
+  background-repeat: repeat;
+  background-attachment: fixed;
   color: var(--ink);
   line-height: 1.7;
   overflow-x: hidden;
@@ -934,6 +938,47 @@ footer .footer-bottom {
 
 /* === ANIMATIONS === */
 @keyframes fadeInUp {
+
+/* === DECORATIVE DIVIDER === */
+.section-divider {
+  height: 60px;
+  background-image: url('assets/divider_deco.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  margin: 0;
+  border: none;
+}
+@media (max-width: 768px) { .section-divider { height: 40px; } }
+
+/* === ALT SECTION GRADIENT BG === */
+section[id="pain-points"],
+section[id="innovation"],
+section[id="team"],
+section[id="value"] {
+  background: linear-gradient(180deg, rgba(244, 237, 224, 0.6) 0%, rgba(235, 226, 210, 0.4) 50%, rgba(244, 237, 224, 0.6) 100%) !important;
+  position: relative;
+}
+section[id="pain-points"]::before,
+section[id="innovation"]::before,
+section[id="team"]::before,
+section[id="value"]::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: radial-gradient(circle at 15% 20%, rgba(196, 163, 90, 0.06) 0%, transparent 40%),
+                    radial-gradient(circle at 85% 80%, rgba(155, 45, 32, 0.04) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+}
+section[id="pain-points"] > .container,
+section[id="innovation"] > .container,
+section[id="team"] > .container,
+section[id="value"] > .container {
+  position: relative;
+  z-index: 1;
+}
   from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: translateY(0); }
 }
@@ -1049,7 +1094,7 @@ footer .footer-bottom {
     </div>
   </div>
 </section>
-
+<div class="section-divider"></div>
 <!-- PAIN POINTS -->
 <section id="pain-points" style="background: var(--bg2);">
   <div class="container">
@@ -1103,7 +1148,7 @@ footer .footer-bottom {
     </div>
   </div>
 </section>
-
+<div class="section-divider"></div>
 <!-- BUSINESS MODULES -->
 <section id="business">
   <div class="container">
@@ -1208,7 +1253,7 @@ footer .footer-bottom {
     </div>
   </div>
 </section>
-
+<div class="section-divider"></div>
 <!-- INNOVATION -->
 <section id="innovation" style="background: var(--bg2);">
   <div class="container">
@@ -1249,7 +1294,7 @@ footer .footer-bottom {
     </div>
   </div>
 </section>
-
+<div class="section-divider"></div>
 <!-- ACHIEVEMENTS -->
 <section id="achievements">
   <div class="container">
@@ -1374,7 +1419,7 @@ footer .footer-bottom {
     </div>
   </div>
 </section>
-
+<div class="section-divider"></div>
 <!-- CULTURAL PRODUCTS GALLERY -->
 <section id="products">
   <div class="container">
@@ -1412,7 +1457,7 @@ footer .footer-bottom {
     </div>
   </div>
 </section>
-
+<div class="section-divider"></div>
 <!-- TEAM -->
 <section id="team" style="background: var(--bg2);">
   <div class="container">
@@ -1481,7 +1526,7 @@ footer .footer-bottom {
     </div>
   </div>
 </section>
-
+<div class="section-divider"></div>
 <!-- TIMELINE -->
 <section id="timeline">
   <div class="container">
@@ -1524,7 +1569,7 @@ footer .footer-bottom {
     </div>
   </div>
 </section>
-
+<div class="section-divider"></div>
 <!-- VALUE -->
 <section id="value" style="background: var(--bg2);">
   <div class="container">
@@ -1581,7 +1626,7 @@ footer .footer-bottom {
     </div>
   </div>
 </section>
-
+<div class="section-divider"></div>
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
