@@ -849,6 +849,43 @@ footer .footer-bottom {
 .photo-full .photo-caption { padding: 14px 20px; font-size: 0.85rem; color: var(--muted); }
 .photo-full .photo-caption strong { color: var(--ink); display: block; margin-bottom: 2px; }
 
+.video-showcase {
+  margin: 48px 0 0;
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--bg);
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+}
+.video-showcase:hover { box-shadow: var(--shadow-lg); }
+.video-showcase video {
+  width: 100%;
+  display: block;
+  background: #1a1410;
+}
+.video-showcase .video-caption {
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.video-showcase .video-caption strong { color: var(--ink); }
+.video-showcase .video-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--accent-light);
+  color: var(--accent);
+  border-radius: 50px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1338,6 +1375,18 @@ footer .footer-bottom {
       <div class="photo-card">
         <img src="assets/award_cert.jpg" alt="竞赛获奖证书">
         <div class="photo-caption"><strong>竞赛获奖证书</strong>《水调歌头——天涯共月》获中国大学生计算机设计大赛奖项</div>
+      </div>
+    </div>
+
+    <!-- 竞赛微课视频 -->
+    <div class="video-showcase fade-in">
+      <video controls preload="metadata" poster="assets/patent_award.jpg">
+        <source src="assets/video_demo.mp4" type="video/mp4">
+        您的浏览器不支持视频播放，请升级浏览器。
+      </video>
+      <div class="video-caption">
+        <span class="video-badge">竞赛作品</span>
+        <span><strong>中国大学生计算机设计大赛参赛微课视频</strong> —— 项目核心实践成果展示，涵盖微课制作、文创开发与数字化实践全流程</span>
       </div>
     </div>
 
