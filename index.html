@@ -154,6 +154,12 @@ nav .nav-inner {
   align-items: center;
   gap: 10px;
 }
+.nav-logo .logo-img {
+  width: 36px; height: 36px;
+  object-fit: contain;
+  flex-shrink: 0;
+  border-radius: 6px;
+}
 .nav-logo .seal {
   display: inline-flex;
   align-items: center;
@@ -230,6 +236,13 @@ nav .nav-inner {
   z-index: 1;
   max-width: 720px;
 }
+.hero-logo {
+  width: 120px; height: auto;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.15);
+}
+@media (max-width: 768px) { .hero-logo { width: 90px; } }
 .hero-eyebrow {
   font-size: 0.8rem;
   font-weight: 700;
@@ -767,6 +780,11 @@ footer .footer-top {
   gap: 24px;
 }
 footer .footer-brand { max-width: 360px; }
+footer .footer-logo {
+  width: 64px; height: auto;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
 footer .footer-brand h3 {
   color: #fff;
   font-size: 1.2rem;
@@ -1029,7 +1047,7 @@ section[id="timeline"] > .container {
 <nav>
   <div class="nav-inner">
     <a href="#hero" class="nav-logo">
-      <span class="seal">文</span>
+      <img src="assets/logo.jpg" alt="文绎新堂" class="logo-img">
       文绎新堂
     </a>
     <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="菜单">≡</button>
@@ -1054,6 +1072,7 @@ section[id="timeline"] > .container {
   </div>
   <div class="container">
     <div class="hero-content">
+      <img src="assets/logo.jpg" alt="文绎新堂 Logo" class="hero-logo fade-in">
       <div class="hero-eyebrow">课文双端 · 数字实践</div>
       <h1>文绎新堂<br><span class="accent-text">课文双端数字实践项目</span></h1>
       <p class="hero-subtitle">
@@ -1660,6 +1679,7 @@ section[id="timeline"] > .container {
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
+        <img src="assets/logo.jpg" alt="文绎新堂" class="footer-logo">
         <h3>文绎新堂</h3>
         <p>课文双端数字实践项目 · 高校新文科跨专业学生实践团队</p>
       </div>
