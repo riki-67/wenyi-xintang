@@ -552,28 +552,18 @@ p { font-size: 1rem; color: var(--ink); }
     }, '-=0.5');
 
     // Actions
-    tl.from('.hero-actions', {
-      opacity: 0,
-      y: 30,
-      duration: 0.6,
-      ease: 'power2.out'
-    }, '-=0.3');
-    tl.to('.hero-actions', {
-      opacity: 1,
-      duration: 0.1
-    }, '-=0.6');
+    tl.fromTo('.hero-actions',
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
+      '-=0.3'
+    );
 
     // Stats
-    tl.from('.hero-stats', {
-      opacity: 0,
-      y: 30,
-      duration: 0.6,
-      ease: 'power2.out'
-    }, '-=0.2');
-    tl.to('.hero-stats', {
-      opacity: 1,
-      duration: 0.1
-    }, '-=0.6');
+    tl.fromTo('.hero-stats',
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
+      '-=0.2'
+    );
 
     // Scroll hint
     tl.to('.scroll-hint', {
